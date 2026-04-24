@@ -34,3 +34,9 @@ Cand pedestrian == 1 in starea VERDE, semaforul trece imediat la GALBEN (apoi la
 4. Set `traffic_light_TB` ca top de simulare
 5. Run Simulation -> Run Behavioral Simulation
 6. Verifica `state`, `counter`, `led_rosu`, `led_galben`, `led_verde` in waveform
+
+## Waveform
+
+![Traffic Light Waveform](screenshots/traffic_light_waveform.png)
+
+Tranzitiile FSM: `00` (ROSU) -> `01` (ROSU+GALBEN) -> `10` (VERDE) -> `11` (GALBEN) -> `00`. La 40ns, `pedestrian_t` devine 1 in starea VERDE si forteaza tranzitia imediata la GALBEN.
