@@ -1,42 +1,38 @@
-# Traffic Light FSM in SystemVerilog
+# Traffic Light FSM
 
-Automat finit pentru un semafor cu buton de pieton. Proiect din cadrul Circuite Integrate Digitale (ETTI UPB), lab 11 - Automate finite.
+Semafor cu buton de pieton, scris in SystemVerilog. Proiect din CID lab 11 (Automate finite), ETTI UPB.
 
 ## Stari
 
-| Stare | Cod | Durata (cicluri clock) |
+| Stare | Cod | Durata (cicluri) |
 |---|---|---|
 | ROSU | `00` | 8 |
 | ROSU + GALBEN | `01` | 2 |
 | VERDE | `10` | 8 |
 | GALBEN | `11` | 2 |
 
-Cand pedestrian == 1 in starea VERDE, semaforul trece imediat la GALBEN (apoi la ROSU).
+Daca `pedestrian == 1` cand e VERDE, trece imediat la GALBEN.
 
 ## Iesiri
 
-- `led_rosu` = 1 in starile ROSU si ROSU_GALBEN
-- `led_galben` = 1 in starile ROSU_GALBEN si GALBEN
-- `led_verde` = 1 in starea VERDE
+- `led_rosu` aprins in starile ROSU si ROSU_GALBEN
+- `led_galben` aprins in starile ROSU_GALBEN si GALBEN
+- `led_verde` aprins in starea VERDE
 
-## Module
+## Fisiere
 
-| Fisier | Rol |
-|---|---|
-| `src/traffic_light.sv` | Modulul FSM |
-| `sim/traffic_light_tb.sv` | Testbench |
+- `src/traffic_light.sv`
+- `sim/traffic_light_tb.sv`
 
 ## Simulare in Vivado
 
-1. Create New Project -> RTL Project
-2. Add Sources -> `src/traffic_light.sv`
-3. Add Sources -> simulation sources -> `sim/traffic_light_tb.sv`
-4. Set `traffic_light_TB` ca top de simulare
-5. Run Simulation -> Run Behavioral Simulation
-6. Verifica `state`, `counter`, `led_rosu`, `led_galben`, `led_verde` in waveform
+1. Create New Project, RTL
+2. Add Sources, `src/` si `sim/`
+3. Set `traffic_light_TB` ca top
+4. Run Behavioral Simulation
 
 ## Waveform
 
 ![Traffic Light Waveform](screenshots/traffic_light_waveform.png)
 
-Tranzitiile FSM: `00` (ROSU) -> `01` (ROSU+GALBEN) -> `10` (VERDE) -> `11` (GALBEN) -> `00`. La 40ns, `pedestrian_t` devine 1 in starea VERDE si forteaza tranzitia imediata la GALBEN.
+Tranzitiile FSM: `00` -> `01` -> `10` -> `11` -> `00`. La 40ns, `pedestrian_t` devine 1 in VERDE si forteaza tranzitia la GALBEN.
